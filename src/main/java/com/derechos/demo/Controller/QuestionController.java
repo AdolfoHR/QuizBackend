@@ -13,7 +13,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin("http://localhost:8080")
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/question")
 @RequiredArgsConstructor
