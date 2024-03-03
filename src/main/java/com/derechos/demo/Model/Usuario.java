@@ -1,25 +1,31 @@
 package com.derechos.demo.Model;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 import javax.validation.constraints.*;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "usuarios")
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "usuario_id")
-    private long usuarioId;
+    private long Id;
 
-    @Column(name = "nombre_usuario")
-    @Size(min = 3, max = 15)
-    private String nombreUsuario;
+    @Size(max = 20)
+    @Column(unique = true)
+    private String username;
 
     @Column(name = "apellido_usuario")
     @Size(min = 3, max = 15)
@@ -30,15 +36,22 @@ public class Usuario {
     @Max(value = 10, message = "Tienes que indicar un número menor a 10")
     private Integer aniosUsuario;
 
+    @Size(max = 50)
     @Email(message = "No se introdujo un correo valido")
-    private String correoUsuario;
+    @Column(unique = true)
+    private String email;
+
+    @Size(max = 120)
+    private String password;
+
+    private String fotoPerfil;
 
 
     @NotNull(message = "El género no puede ser nulo")
     @Pattern(regexp = "^(Masculino|Femenino|Otro)$", message = "El género debe ser 'Masculino', 'Femenino' u 'Otro'")
     private String genero;
 
-    @NotBlank (message = "El rango no puede estar en blanco")
+    @NotBlank(message = "El rango no puede estar en blanco")
     @Pattern(regexp = "^(Novato|Aprendiz|Crack Laboral|Maestro Laboral|Gurú Laboral|Leyenda Laboral)$", message = "Valor de rango no válido")
     private String rango;
 
@@ -59,4 +72,12 @@ public class Usuario {
             "Región de Los Ríos",
             "Región de Los Lagos",
             "Región de Aysén del General Carlos Ibáñez del Campo",
-            "Región de Magallanes y de la Antártica Chilena");}
+            "Región de Magallanes y de la Antártica Chilena");
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "usuarios_roles",
+            joinColumns = @JoinColumn(name = "usuario_id"),
+            inverseJoinColumns = @JoinColumn(name = "rol_id"))
+    private Set<Rol> roles = new HashSet<>();
+
+
+}

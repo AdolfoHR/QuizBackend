@@ -61,3 +61,7 @@ INSERT IGNORE INTO Correct_choices (correct_choices_id, question_id, correct_cho
 (14, 14, 'Se excluyen los funcionarios públicos y con contrato de honorarios'),
 (15, 15, 'No, ya que implementa un artículo en el que se prohíbe la disminución de sueldos');
 
+INSERT IGNORE INTO usuarios (edad_usuario, apellido_usuario, genero, nombre_usuario, rango, email, username) VALUES
+(28, 'Hermosilla', 'Masculino', 'Adolfo', 'novato', 'correoprueba@gmail.com', 'andres'),
+(17, 'Cortez', 'Femenino', 'Claudia', 'novato', 'correoprueba2@gmail.com', 'Clau');
+
