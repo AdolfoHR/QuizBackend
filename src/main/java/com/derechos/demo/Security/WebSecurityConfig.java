@@ -62,8 +62,12 @@ public class WebSecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // Configura la gestión de sesiones como sin estado
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/**").permitAll() // Permite el acceso a rutas específicas sin autenticación
-                        .requestMatchers("/question/**").permitAll()
-                        .requestMatchers("/usuario/**").permitAll()
+                        .requestMatchers("/question/all-questions").permitAll()
+                        .requestMatchers("/api/auth/login").hasRole("USER")
+                        /*.requestMatchers("/usuario/lista").hasRole("ADMIN")
+                        .requestMatchers("/usuario/nuevo").hasRole("ADMIN")
+                        .requestMatchers("/api/auth/login").permitAll()*/
+                        .anyRequest().authenticated()
                 );
         http.authenticationProvider(authenticationProvider()); // Agrega el proveedor de autenticación al objeto HttpSecurity
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class); // Agrega el filtro de tokens JWT antes del filtro de autenticación de usuario y contraseña

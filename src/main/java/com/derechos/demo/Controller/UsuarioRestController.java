@@ -1,5 +1,6 @@
 package com.derechos.demo.Controller;
 
+import com.derechos.demo.DTO.LoginDTO;
 import com.derechos.demo.DTO.UsuarioDTO;
 import com.derechos.demo.Model.Usuario;
 import com.derechos.demo.Service.UsuarioService;
@@ -32,14 +33,6 @@ public class UsuarioRestController {
         Optional<Usuario> usuarioSeleccionado = usuarioService.buscarUsuarioPorId(id);
         return usuarioSeleccionado
                 .map(usuario -> new ResponseEntity<>(usuario, HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
-    }
-
-    @GetMapping("/login")
-    public ResponseEntity<UsuarioDTO> usuarioDTO(@RequestBody String email) {
-        Optional<UsuarioDTO> usuarioDTO = usuarioService.obtenerUsuarioDTO(email);
-        return usuarioDTO
-                .map(dto -> new ResponseEntity<>(dto, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 

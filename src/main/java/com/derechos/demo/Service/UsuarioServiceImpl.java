@@ -157,10 +157,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
         return usuario.map(u -> UsuarioDTO.builder()
                 .username(u.getUsername())
-                .apellidoUsuario(u.getApellidoUsuario())
                 .email(u.getEmail())
-                .genero(u.getGenero())
-                .rango(u.getRango())
                 .build());
     }
 }
