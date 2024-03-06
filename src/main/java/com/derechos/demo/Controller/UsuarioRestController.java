@@ -4,12 +4,16 @@ import com.derechos.demo.DTO.LoginDTO;
 import com.derechos.demo.DTO.UsuarioDTO;
 import com.derechos.demo.Model.Usuario;
 import com.derechos.demo.Service.UsuarioService;
+import com.derechos.demo.cloud.S3Service;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+
+
+
 
 @RestController
 @CrossOrigin("*")
@@ -18,9 +22,13 @@ public class UsuarioRestController {
 
     private final UsuarioService usuarioService;
 
-    public UsuarioRestController(UsuarioService usuarioService) {
+    private final S3Service s3Service;
+
+    public UsuarioRestController(UsuarioService usuarioService, S3Service s3Service) {
         this.usuarioService = usuarioService;
+        this.s3Service = s3Service;
     }
+
 
     @GetMapping("/lista")
     public ResponseEntity<List<Usuario>> listaUsuarios() {
@@ -54,5 +62,12 @@ public class UsuarioRestController {
         return usuarioEditado
                 .map(usuarioResponse -> new ResponseEntity<>(usuarioResponse, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    @GetMapping("/listaimagen")
+    public  ResponseEntity<List <String>> listaImagen (){
+        List <String> avatares = s3Service.obtenerListaDeImagenes();
+        return  new ResponseEntity<>(avatares,HttpStatus.OK);
+
     }
 }
