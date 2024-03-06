@@ -55,9 +55,10 @@ public class AuthRestController {
 
         // Genera un token JWT para el usuario autenticado
         String jwtToken = jwtUtils.generateJwtToken(userDetails);
+        Long usuarioId = usuarioService.buscarUsuarioPorUsername(userDetails.getUsername()).get().getId();
 
         // Retorna una respuesta exitosa con el token JWT y detalles del usuario
-        return new ResponseEntity<>(new JwtResponse(jwtToken, userDetails.getUsername(), userDetails.getEmail()), HttpStatus.OK);
+        return new ResponseEntity<>(new JwtResponse(jwtToken,usuarioId, userDetails.getUsername(), userDetails.getEmail()), HttpStatus.OK);
     }
 
     @PostMapping("/registro")
@@ -76,6 +77,8 @@ public class AuthRestController {
         Usuario usuario = Usuario.builder()
                 .username(solicitudRegistro.getUsername())
                 .email(solicitudRegistro.getEmail())
+                .apellidoUsuario(solicitudRegistro.getApellidoUsuario())
+                .aniosUsuario(solicitudRegistro.getAniosUsuario())
                 .password(passwordEncoder.encode(solicitudRegistro.getPassword())) // Codifica la contraseña antes de almacenarla
                 .build();
 
@@ -117,6 +120,7 @@ public class AuthRestController {
     @Setter
     public class JwtResponse {
         private String token;
+        private Long id;
         private String username;
         private String email;
     }

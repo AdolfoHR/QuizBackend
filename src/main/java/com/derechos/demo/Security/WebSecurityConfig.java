@@ -62,8 +62,13 @@ public class WebSecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // Configura la gestión de sesiones como sin estado
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/**").permitAll() // Permite el acceso a rutas específicas sin autenticación
+                        .requestMatchers("/api/auth/login").permitAll()
+                        .requestMatchers("/api/auth/registro").permitAll()
                         .requestMatchers("/question/all-questions").permitAll()
-                        .requestMatchers("/api/auth/login").hasRole("USER")
+                        .requestMatchers("/usuario/lista").permitAll()
+                        .requestMatchers("/usuario/**").permitAll()
+
+
                         /*.requestMatchers("/usuario/lista").hasRole("ADMIN")
                         .requestMatchers("/usuario/nuevo").hasRole("ADMIN")
                         .requestMatchers("/api/auth/login").permitAll()*/
