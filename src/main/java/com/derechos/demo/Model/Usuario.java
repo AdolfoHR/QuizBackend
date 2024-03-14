@@ -28,6 +28,10 @@ public class Usuario {
     @Column(unique = true)
     private String username;
 
+    @Size(max = 20)
+    @Column(unique = true)
+    private String nombreUsuario;
+
     @Column(name = "apellido_usuario")
     @Size(min = 3, max = 15)
     private String apellidoUsuario;

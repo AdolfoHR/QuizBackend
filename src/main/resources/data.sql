@@ -1,7 +1,7 @@
 
 -- Insertar preguntas
 
-insert ignore into Question (question_id, question_text, category, question_type) values
+insert ignore into question (question_id, question_text, category, question_type) values
 
 (1, '¿De qué manera se puede ejercer el acoso laboral?', 'Acoso laboral', 'Alternativa'),
 (2, '¿Cómo se nombra cuando el acoso laboral lo ejerce uno o varios trabajadores de la misma línea jerárquica?', 'Acoso laboral', 'Alternativa'),
@@ -23,7 +23,7 @@ insert ignore into Question (question_id, question_text, category, question_type
 
  --Insertar alternativas
 
-INSERT IGNORE INTO Question_choices (choices_id, question_id, choices_text) VALUES
+INSERT IGNORE INTO question_choices (choices_id, question_id, choices_text) VALUES
 (1, 1, '["Vertical y diagonal", "Diagonal y horizontal"]'),
 (2, 2, '["Vertical", "Diagonal"]'),
 (3, 3, '["Horizontal", "Diagonal"]'),
@@ -44,7 +44,7 @@ INSERT IGNORE INTO Question_choices (choices_id, question_id, choices_text) VALU
 
 -- Insertar alternativas correctas
 
-INSERT IGNORE INTO Correct_choices (correct_choices_id, question_id, correct_choices_text) VALUES
+INSERT IGNORE INTO correct_choices (correct_choices_id, question_id, correct_choices_text) VALUES
 (1, 1, 'Horizontal y vertical'),
 (2, 2, 'Horizontal'),
 (3, 3, 'Vertical'),
